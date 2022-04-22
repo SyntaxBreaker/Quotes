@@ -3,9 +3,9 @@ import {UserContext} from "../providers/UserProvider.tsx";
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
-function CreateQuote() {
+const CreateQuote: React.FC = () => {
     const [user, setUser] = useContext(UserContext);
-    const [info, setInfo] = useState(null);
+    const [info, setInfo] = useState<null | string>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,8 +13,6 @@ function CreateQuote() {
             alert(info);
             setInfo(null);
         }
-
-
     }, [info]);
 
     const handleSubmit = (event) => {

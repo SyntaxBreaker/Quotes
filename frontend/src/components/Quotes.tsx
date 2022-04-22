@@ -32,12 +32,19 @@ const StyledHr = styled.hr`
   border-top: 1px solid #090A0C;
 `;
 
+interface Quote {
+    id: string;
+    quote: string;
+    author: string;
+    createdBy: string;
+}
+
 function Quotes() {
     const [user, setUser] = useContext(UserContext);
-    const [quotes, setQuotes] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
-    const [quoteToEdit, setQuoteToEdit] = useState({});
-    const [info, setInfo] = useState(null);
+    const [quotes, setQuotes] = useState<Quote[]>([]);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [quoteToEdit, setQuoteToEdit] = useState<Quote | object>({});
+    const [info, setInfo] = useState<string | null>(null);
 
     useEffect(() => {
         axios({

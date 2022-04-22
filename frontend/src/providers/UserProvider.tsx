@@ -3,8 +3,15 @@ import axios from 'axios';
 
 export const UserContext = React.createContext(null);
 
+interface User {
+    displayName: string;
+    email: string;
+    refreshToken: string;
+    token: string;
+}
+
 export default function UserProvider({children}) {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
         if(user) {

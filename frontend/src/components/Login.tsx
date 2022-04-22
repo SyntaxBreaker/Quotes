@@ -5,9 +5,9 @@ import axios from 'axios';
 import styled from "styled-components";
 
 
-function Login() {
+const Login: React.FC = () => {
     const [user, setUser] = useContext(UserContext);
-    const [info, setInfo] = useState(null);
+    const [info, setInfo] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const handleSubmit = event => {

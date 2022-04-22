@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-function Register() {
-    const [info, setInfo] = useState(null);
+const Register: React.FC = () => {
+    const [info, setInfo] = useState<string | null>(null);
 
     const handleSubmit = event => {
         event.preventDefault();

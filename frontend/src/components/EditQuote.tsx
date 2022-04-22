@@ -12,7 +12,13 @@ const StyledForm = styled.form`
   top: 8%;
 `;
 
-function EditQuote({setIsOpen, quoteToEdit, setInfo}) {
+interface Props {
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>; 
+    quoteToEdit: {};
+    setInfo: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const EditQuote: React.FC<Props> = ({setIsOpen, quoteToEdit, setInfo}) => {
     const [user, setUser] = useContext(UserContext);
 
     const handleSubmit = event => {
