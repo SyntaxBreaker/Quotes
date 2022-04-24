@@ -49,7 +49,7 @@ function Quotes() {
     useEffect(() => {
         axios({
             method: 'get',
-            url: 'http://localhost:3000/'
+            url: `${process.env.REACT_APP_API_URL}/`
         })
             .then(res => setQuotes(res.data))
             .catch(err => console.log(err))

@@ -27,7 +27,7 @@ const EditQuote: React.FC<Props> = ({setIsOpen, quoteToEdit, setInfo}) => {
         const {quote, author} = event.target;
         axios({
             method: 'patch',
-            url: `http://localhost:3000/edit/${quoteToEdit.id}`,
+            url: `${process.env.REACT_APP_API_URL}/edit/${quoteToEdit.id}`,
             data: {
                 quote: quote.value,
                 author: author.value

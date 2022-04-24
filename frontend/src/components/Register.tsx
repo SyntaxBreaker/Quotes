@@ -6,11 +6,12 @@ const Register: React.FC = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
+        
         const {email, nickname, password} = event.target;
-        console.log(email.value, nickname.value, password.value);
+
         axios({
             method: 'post',
-            url: 'http://localhost:3000/register',
+            url: `${process.env.REACT_APP_API_URL}/register`,
             data: {
                 email: email.value,
                 displayName: nickname.value,
@@ -26,7 +27,7 @@ const Register: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 {info && <p>{info}</p>}
                 <label>Email</label>
-                <input type="text" name="email" required />
+                <input type="email" name="email" required />
                 <label>Nickname</label>
                 <input type="text" name="nickname" required />
                 <label>Password</label>

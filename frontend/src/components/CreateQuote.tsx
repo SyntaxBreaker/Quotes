@@ -21,7 +21,7 @@ const CreateQuote: React.FC = () => {
 
         axios({
             method: 'post',
-            url: 'http://localhost:3000/add',
+            url: `${process.env.REACT_APP_API_URL}/add`,
             data: {
                 quote: quote.value,
                 author: author.value

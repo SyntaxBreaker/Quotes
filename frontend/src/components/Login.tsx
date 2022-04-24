@@ -12,10 +12,12 @@ const Login: React.FC = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
+
         const {email, password} = event.target;
+        
         axios({
             method: 'post',
-            url: 'http://localhost:3000/login',
+            url: `${process.env.REACT_APP_API_URL}/login`,
             data: {
                 email: email.value,
                 password: password.value

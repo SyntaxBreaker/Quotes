@@ -17,7 +17,7 @@ export default function UserProvider({children}) {
         if(user) {
             axios({
                 method: 'post',
-                url: 'http://localhost:3000/refreshToken',
+                url: `${process.env.REACT_APP_API_URL}/refreshToken`,
                 data: {
                     token: user['refreshToken']
                 }
