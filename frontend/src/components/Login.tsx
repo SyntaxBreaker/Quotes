@@ -37,7 +37,7 @@ const Login: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 {info && <p>{info}</p>}
                 <label>Email</label>
-                <input type="text" name="email" required />
+                <input type="email" name="email" required />
                 <label>Password</label>
                 <input type="password" name="password" required />
                 <button type="submit">Submit</button>

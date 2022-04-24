@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 const Register: React.FC = () => {
     const [info, setInfo] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -18,7 +20,10 @@ const Register: React.FC = () => {
                 password: password.value
             }
         })
-            .then(res => setInfo('Account created successfully'))
+            .then(res => {
+                setInfo('Account created successfully');
+                navigate('/login');
+            })
             .catch(err => setInfo('We cannot create an account'))
     }
 
