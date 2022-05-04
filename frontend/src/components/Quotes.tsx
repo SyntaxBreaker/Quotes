@@ -8,6 +8,7 @@ const QuotesContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  justify-content: center;
   
   @media (min-width: 768px) {
     flex-direction: row;
@@ -21,6 +22,8 @@ const QuoteContainer = styled.div`
   padding: .8rem;
   color: #E2E9F1;
   background-color: #0055B0;
+  flex-wrap: wrap;
+  flex-basis: 30%;
   
   h2 {
     color: ivory;

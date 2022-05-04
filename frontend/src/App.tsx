@@ -1,10 +1,11 @@
-import React from 'react';
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {BrowserRouter, Routes, Route, Link, Navigate} from 'react-router-dom';
 import Login from "./components/Login.tsx";
 import Register from "./components/Register.tsx";
 import Quotes from "./components/Quotes.tsx";
 import CreateQuote from "./components/CreateQuote.tsx";
 import styled from "styled-components";
+import {UserContext} from "./providers/UserProvider.tsx";
 
 const MainContainer = styled.div`
   height: 100%;
@@ -17,6 +18,12 @@ const StyledNav = styled.nav`
   align-items: center;
   background-color: #0055B0;
   height: 2rem;
+  
+  @media only screen and (max-width: 600px) {
+    height: 6rem;
+    justify-content: space-around;
+    flex-direction: column;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -25,26 +32,51 @@ const StyledLink = styled(Link)`
   margin: 0.5rem;
 `
 
+const StyledContent = styled.div`
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 992px) {
+    width: 75%;
+    margin: 0 auto;
+  }
+`
+
 function App() {
+    const [user, setUser] = useContext(UserContext);
+
   return (
     <MainContainer>
         <BrowserRouter>
             <StyledNav>
                 <div>
                     <StyledLink to=''>Homepage</StyledLink>
-                    <StyledLink to='create'>Create a quote</StyledLink>
                 </div>
                 <div>
-                    <StyledLink to='login'>Login</StyledLink>
-                    <StyledLink to='register'>Register</StyledLink>
+                    {user ? (
+                        <>
+                            <StyledLink to='create'>Create a quote</StyledLink>
+                        </>
+                    ) : (
+                        <>
+                            <StyledLink to='login'>Login</StyledLink>
+                            <StyledLink to='register'>Register</StyledLink>
+                        </>
+                    )}
                 </div>
             </StyledNav>
-            <Routes>
-                <Route path='' element={<Quotes />} />
-                <Route path='login' element={<Login />} />
-                <Route path='register' element={<Register />} />
-                <Route path='create' element={<CreateQuote />} />
-            </Routes>
+            <StyledContent>
+                <Routes>
+                    <Route path='' element={<Quotes />} />
+                    <Route path='login' element={<Login />} />
+                    <Route path='register' element={<Register />} />
+                    <Route path='create' element={user? <CreateQuote /> : <Navigate to="/login" />} />
+                </Routes>
+            </StyledContent>
         </BrowserRouter>
     </MainContainer>
   );
