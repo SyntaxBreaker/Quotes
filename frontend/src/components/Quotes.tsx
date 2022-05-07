@@ -30,6 +30,29 @@ const QuoteContainer = styled.div`
   }
 `;
 
+const Preloader = styled.div`
+  display: flex;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  height: 50px;
+  width: 50px;
+  border: 4px rgba(0, 0, 0, 0.25) solid;
+  border-top: 4px #0055B0 solid;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+
+  @keyframes spin {
+    from {
+      transform: rotate(359deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
+`;
+
 const StyledHr = styled.hr`
   width: 100%;
   border-top: 1px solid #090A0C;
@@ -48,14 +71,21 @@ function Quotes() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [quoteToEdit, setQuoteToEdit] = useState<Quote | object>({});
     const [info, setInfo] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios({
             method: 'get',
             url: `${process.env.REACT_APP_API_URL}/`
         })
-            .then(res => setQuotes(res.data))
-            .catch(err => console.log(err))
+            .then(res => {
+                setQuotes(res.data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setIsLoading(false);
+            })
     }, []);
 
     useEffect(() => {
@@ -79,7 +109,8 @@ function Quotes() {
 
     return (
         <QuotesContainer>
-            {quotes.length !== 0 && quotes.map(quote => (
+            {isLoading ? <Preloader></Preloader> : (
+            quotes.length !== 0 && quotes.map(quote => (
                 <QuoteContainer key={quote.id}>
                     <h2>"{quote.quote}"</h2>
                     <p>Author: {quote.author}</p>
@@ -88,7 +119,7 @@ function Quotes() {
                     {user && user['email'] === quote['createdBy'] && <button onClick={() => {setIsOpen(true); setQuoteToEdit(quote); }}>Edit it</button>}
                     {user && user['email'] === quote['createdBy'] && <button onClick={() => removeQuote(quote.id)}>Remove</button>}
                 </QuoteContainer>
-            ))}
+            )))}
             {isOpen && <EditQuote setIsOpen={setIsOpen} quoteToEdit={quoteToEdit} setInfo={setInfo} />}
         </QuotesContainer>
 

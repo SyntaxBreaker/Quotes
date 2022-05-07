@@ -93,11 +93,11 @@ const StyledContent = styled.div`
     width: 75%;
     margin: 0 auto;
   }
-`
+`;
 
 function App() {
-    const [user, setUser] = useContext(UserContext);
-    const [isHidden, setIsHidden] = useState(false);
+  const [user, setUser] = useContext(UserContext);
+  const [isHidden, setIsHidden] = useState(false);
 
   return (
     <MainContainer>
