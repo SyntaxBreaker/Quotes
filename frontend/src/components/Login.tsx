@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from "react";
 import {useNavigate} from 'react-router-dom';
 import {UserContext} from "../providers/UserProvider.tsx";
 import axios from 'axios';
-import styled from "styled-components";
 
 
 const Login: React.FC = () => {

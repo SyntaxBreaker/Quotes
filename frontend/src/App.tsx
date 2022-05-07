@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {BrowserRouter, Routes, Route, Link, Navigate} from 'react-router-dom';
 import Login from "./components/Login.tsx";
 import Register from "./components/Register.tsx";
@@ -15,14 +15,63 @@ const MainContainer = styled.div`
 const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   background-color: #0055B0;
-  height: 2rem;
+  color: #E2E9F1;
+  min-height: 2rem;
+  padding: .5rem 0;
   
-  @media only screen and (max-width: 600px) {
-    height: 6rem;
+  @media (max-width: 768px) {
     justify-content: space-around;
     flex-direction: column;
+  }
+`;
+
+const MainNav = styled.div`
+  display: ${props => props.active};
+  flex-direction: column;
+  width: 1rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+`;
+
+const Hamburger = styled.div`
+  display: none;
+
+  @media (max-width: 600px) {
+    display: initial;
+    align-self: flex-end;
+    position: absolute;
+    right: 1rem;
+  }
+`;
+
+const HamburgerIcon = styled.div`
+  background-color: #E2E9F1;
+  height: .3rem;
+  width: 2rem;
+  transform: translate3d(0, 0, 0);
+  margin: 0.6em 0;
+  position: relative;
+
+  &::before, &::after {
+    content: "";
+    background-color: #E2E9F1;
+    height: .3rem;
+    width: 2rem;
+    position: absolute;
+    margin: auto;
+  }
+
+  &::before {
+    transform: translate3d(0, -8px, 0);
+  }
+
+  &::after {
+    transform: translate3d(0, 8px, 0);
   }
 `;
 
@@ -48,15 +97,14 @@ const StyledContent = styled.div`
 
 function App() {
     const [user, setUser] = useContext(UserContext);
+    const [isHidden, setIsHidden] = useState(false);
 
   return (
     <MainContainer>
         <BrowserRouter>
             <StyledNav>
-                <div>
-                    <StyledLink to=''>Homepage</StyledLink>
-                </div>
-                <div>
+                <StyledLink to=''>Homepage</StyledLink>
+                <MainNav active={isHidden ? 'flex' : 'none'}>
                     {user ? (
                         <>
                             <StyledLink to='create'>Create a quote</StyledLink>
@@ -67,7 +115,10 @@ function App() {
                             <StyledLink to='register'>Register</StyledLink>
                         </>
                     )}
-                </div>
+                </MainNav>
+                <Hamburger onClick={() => setIsHidden(!isHidden)}>
+                  <HamburgerIcon />
+                </Hamburger>
             </StyledNav>
             <StyledContent>
                 <Routes>
