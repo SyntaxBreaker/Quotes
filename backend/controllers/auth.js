@@ -17,10 +17,13 @@ const login = async (req, res) => {
             const passwordIsValid = bcrypt.compareSync(password, doc.password);
             if(!passwordIsValid) return res.sendStatus(403);
 
-            const token = jwt.sign({displayName, email}, process.env.ACCESS_TOKEN, {expiresIn: '15m'});
+            const token = jwt.sign({displayName, email}, process.env.ACCESS_TOKEN, {expiresIn: '15s'});
             const refreshToken = jwt.sign({displayName, email}, process.env.REFRESH_TOKEN);
 
-            res.json({token, refreshToken, email, displayName});
+            res.cookie('token', token, {maxAge: 900000, httpOnly: true});
+            res.cookie('refreshToken', refreshToken, {httpOnly: true});
+
+            res.json({email, displayName});
         })
 }
 
@@ -46,7 +49,7 @@ const register = async (req, res) => {
 }
 
 const refreshToken = (req, res) => {
-    const {token} = req.body;
+    const token = req.cookies.refreshToken;
 
     jwt.verify(token, process.env.REFRESH_TOKEN, (err, data) => {
         if(err) {
@@ -58,8 +61,9 @@ const refreshToken = (req, res) => {
             email: data.email
         }
 
-        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: '1h'});
-        res.json({token: newAccessToken});
+        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: '30s'});
+        res.cookie('token', newAccessToken, {maxAge: 900000, httpOnly: true});
+        res.sendStatus(200);
     })
 }
 
