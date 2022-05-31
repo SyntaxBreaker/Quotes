@@ -29,7 +29,6 @@ const StyledNav = styled.nav`
 const MainNav = styled.div`
   display: ${props => props.active};
   flex-direction: column;
-  width: 1rem;
 
   @media (min-width: 768px) {
     display: flex;
