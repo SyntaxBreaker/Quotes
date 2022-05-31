@@ -99,9 +99,7 @@ function Quotes() {
         axios({
             method: 'delete',
             url: `http://localhost:3000/remove/${id}`,
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
+            withCredentials: true,
         })
             .then(res => setInfo(`The quote has been removed`))
             .catch(err => setInfo(`The quote cannot be deleted`))

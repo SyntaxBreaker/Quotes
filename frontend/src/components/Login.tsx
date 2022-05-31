@@ -20,10 +20,13 @@ const Login: React.FC = () => {
             data: {
                 email: email.value,
                 password: password.value
-            }
+            },
+            withCredentials: true,
         })
             .then(res => {
                 setUser(res.data);
+                localStorage.setItem('displayName', res.data.displayName);
+                localStorage.setItem('email', res.data.email);
                 navigate('/');
             })
             .catch(err => {

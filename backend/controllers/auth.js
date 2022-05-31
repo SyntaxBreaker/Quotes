@@ -17,7 +17,7 @@ const login = async (req, res) => {
             const passwordIsValid = bcrypt.compareSync(password, doc.password);
             if(!passwordIsValid) return res.sendStatus(403);
 
-            const token = jwt.sign({displayName, email}, process.env.ACCESS_TOKEN, {expiresIn: '15s'});
+            const token = jwt.sign({displayName, email}, process.env.ACCESS_TOKEN, {expiresIn: '15m'});
             const refreshToken = jwt.sign({displayName, email}, process.env.REFRESH_TOKEN);
 
             res.cookie('token', token, {maxAge: 900000, httpOnly: true});
@@ -61,7 +61,7 @@ const refreshToken = (req, res) => {
             email: data.email
         }
 
-        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: '30s'});
+        const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: '15m'});
         res.cookie('token', newAccessToken, {maxAge: 900000, httpOnly: true});
         res.sendStatus(200);
     })

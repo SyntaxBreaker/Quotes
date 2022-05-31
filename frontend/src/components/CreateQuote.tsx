@@ -26,9 +26,7 @@ const CreateQuote: React.FC = () => {
                 quote: quote.value,
                 author: author.value
             },
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
+            withCredentials: true,
         })
             .then(res => {
                 setInfo('A quote was created successfully');

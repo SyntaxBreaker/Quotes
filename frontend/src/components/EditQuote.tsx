@@ -32,9 +32,7 @@ const EditQuote: React.FC<Props> = ({setIsOpen, quoteToEdit, setInfo}) => {
                 quote: quote.value,
                 author: author.value
             },
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
+            withCredentials: true,
         })
             .then(res => {
                 setIsOpen(false);
