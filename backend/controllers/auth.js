@@ -20,8 +20,8 @@ const login = async (req, res) => {
             const token = jwt.sign({displayName, email}, process.env.ACCESS_TOKEN, {expiresIn: '15m'});
             const refreshToken = jwt.sign({displayName, email}, process.env.REFRESH_TOKEN);
 
-            res.cookie('token', token, {maxAge: 900000, httpOnly: true});
-            res.cookie('refreshToken', refreshToken, {httpOnly: true});
+            res.cookie('token', token, {maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true});
+            res.cookie('refreshToken', refreshToken, {httpOnly: true, sameSite: 'None', secure: true});
 
             res.json({email, displayName});
         })
@@ -62,7 +62,7 @@ const refreshToken = (req, res) => {
         }
 
         const newAccessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {expiresIn: '15m'});
-        res.cookie('token', newAccessToken, {maxAge: 900000, httpOnly: true});
+        res.cookie('token', newAccessToken, {maxAge: 900000, httpOnly: true, sameSite: 'None', secure: true});
         res.sendStatus(200);
     })
 }
