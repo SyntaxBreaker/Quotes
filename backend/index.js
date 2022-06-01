@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     credentials: true,
-    origin: true
+    origin: process.env.ORIGIN
 }));
 
 mongoose.connect(process.env.dbURI)
