@@ -98,7 +98,7 @@ function Quotes() {
     const removeQuote = (id) => {
         axios({
             method: 'delete',
-            url: `http://localhost:3000/remove/${id}`,
+            url: `${process.env.REACT_APP_API_URL}/remove/${id}`,
             withCredentials: true,
         })
             .then(res => setInfo(`The quote has been removed`))
