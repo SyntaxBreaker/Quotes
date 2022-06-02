@@ -86,7 +86,7 @@ function Quotes() {
                 console.log(err);
                 setIsLoading(false);
             })
-    }, []);
+    }, [quotes]);
 
     useEffect(() => {
         if(info) {

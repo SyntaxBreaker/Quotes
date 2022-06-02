@@ -6,6 +6,7 @@ import Quotes from "./components/Quotes.tsx";
 import CreateQuote from "./components/CreateQuote.tsx";
 import styled from "styled-components";
 import {UserContext} from "./providers/UserProvider.tsx";
+import axios from 'axios';
 
 const MainContainer = styled.div`
   height: 100%;
@@ -80,6 +81,12 @@ const StyledLink = styled(Link)`
   margin: 0.5rem;
 `
 
+const StyledAnchor = styled.a`
+  color: #E2E9F1;
+  text-decoration: none;
+  margin: 0.5rem;
+`
+
 const StyledContent = styled.div`
   width: 100%;
   
@@ -98,6 +105,20 @@ function App() {
   const [user, setUser] = useContext(UserContext);
   const [isHidden, setIsHidden] = useState(false);
 
+  const logout = event => {
+    event.preventDefault();
+
+    axios({
+      method: 'delete',
+      url: `${process.env.REACT_APP_API_URL}/logout`,
+      withCredentials: true,
+    }).then(res => {
+      setUser(res.data);
+      localStorage.clear();
+    })
+    .catch(err => console.log(err));
+  }
+
   return (
     <MainContainer>
         <BrowserRouter>
@@ -107,6 +128,7 @@ function App() {
                     {user ? (
                         <>
                             <StyledLink to='create'>Create a quote</StyledLink>
+                            <StyledAnchor href='' onClick={logout}>Logout</StyledAnchor>
                         </>
                     ) : (
                         <>
