@@ -28,7 +28,7 @@ export default function UserProvider({children}) {
                 .then(res => console.log(`Token has been refreshed`))
                 .catch(err => setUser(null))
         }
-    }, [user]);
+    }, []);
 
     return <UserContext.Provider value={[user, setUser]}>{children}</UserContext.Provider>;
 }

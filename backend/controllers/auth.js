@@ -70,7 +70,7 @@ const refreshToken = (req, res) => {
 const logout = (req, res) => {
     res.clearCookie('token');
     res.clearCookie('refreshToken');
-    res.json({email: null, displayName: null});
+    res.sendStatus(200);
 }
 
 export {

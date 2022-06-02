@@ -113,7 +113,7 @@ function App() {
       url: `${process.env.REACT_APP_API_URL}/logout`,
       withCredentials: true,
     }).then(res => {
-      setUser(res.data);
+      setUser(null);
       localStorage.clear();
     })
     .catch(err => console.log(err));
