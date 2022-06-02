@@ -21,9 +21,7 @@ const GlobalStyles = createGlobalStyle`
   form {
     height: 100%;
     width: 90%;
-    position: relative;
-    top: 30px;
-    left: 5%;
+    margin: 30px auto 0;
     display: flex;
     flex-direction: column;
     background-color: #0055B0;
@@ -58,7 +56,12 @@ const GlobalStyles = createGlobalStyle`
     @media (min-width: 768px) {
       & {
         width: 50%;
-        left: 25%;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      & {
+        width: 35%;
       }
     }
   }
