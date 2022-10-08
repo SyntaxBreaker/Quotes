@@ -1,5 +1,5 @@
 # Quotes
-A simple service that allows you to explore and share quotes.
+A simple service that lets you explore and share quotes.
 
 ## Demo
 https://quotes-five-lime.vercel.app/
@@ -20,7 +20,7 @@ cd Quotes
 ```
 
 ### To install the back-end
-Go to the backend folder, then edit the .env.example file. Replace the name of the .env.example file with .env.
+Go to the backend folder, then edit the .env.example file. Replace the name of the .env.example file with the .env.
 ```bash
 cd backend
 ```
@@ -36,7 +36,7 @@ npm start
 ```
 
 ### To install the front-end
-Go to the frontend folder, then edit the .env.example file. Replace the name of the .env.example file with .env.
+Go to the frontend folder, then edit the .env.example file. Replace the name of the .env.example file with the .env.
 ```bash
 cd frontend
 ```
