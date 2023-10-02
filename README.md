@@ -1,9 +1,6 @@
 # Quotes
 A simple service that lets you explore and share quotes.
 
-## Demo
-https://quotes-five-lime.vercel.app/
-
 ## Technology Stack
 **Front-end:** React, Typescript, and Styled-componentss
 **Back-end:** Node.js, Express, and Mongoose (MongoDB).
@@ -11,7 +8,7 @@ https://quotes-five-lime.vercel.app/
 ## Run Locally
 Clone the project.
 ```bash
-git clone https://github.com/xMetaneRx/Quotes.git
+git clone https://github.com/SyntaxBreaker/Quotes.git
 ```
 
 Go to the project directory.
@@ -52,4 +49,4 @@ npm start
 ```
 
 ## Author
-- [@xMetaneRx](https://github.com/xMetaneRx/)
+- [@SyntaxBreaker](https://github.com/SyntaxBreaker)
